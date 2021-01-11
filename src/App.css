@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.buttonInside {
+  position: relative;
+  width: 150px;
+}
+
+input { 
+  margin: 0px; 
+  padding: 0px; 
+  width: 100%; 
+  outline: none; 
+  height: 30px; 
+  border-radius: 0px; 
+}
+
+button { 
+  position: absolute; 
+  top: 0px; 
+  border-radius: 0px; 
+  right: 5px; 
+  z-index: 2; 
+  border: none;  
+  height: 20px; 
+  cursor: pointer; 
+  color: black; 
+  background-color: white; 
+  transform: translateX(2px); 
+}
+

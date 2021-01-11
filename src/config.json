@@ -1,0 +1,87 @@
+{
+  "columns": [
+    { "key": "id", "name": "ID" },
+    { "key": "comments", "name": "Comments"},
+    { "key": "membershipType", "name": "Membership Type"},
+    { "key": "vehicleType", "name": "Vehicle Type"},
+    { "key": "minSalePrice", "name": "Min Sale Price"},
+    { "key": "maxSalePrice", "name": "Max Sale Price"},
+    { "key": "pricingFunction", "name": "Pricing (Function)"},
+    { "key": "pricingValue", "name": "Pricing (Value)"}
+  ],
+  "columnMetadata": {
+    "id": {
+      "type": "Text"
+    }, 
+    "comments" : {
+      "type": "Text"
+    },
+    "membershipType": {
+      "type": "DropDown",
+      "options": [
+        {"key": "basic", "text": "basic"},
+        {"key": "monthly", "text": "Monthly"},
+        {"key": "premium", "text": "Premium"}
+      ],
+      "formatter": "(props) => (<DropDown {...props} onChange={handleDropDownChange} />)"
+    },
+    "vehicleType": {
+      "type": "DropDown",
+      "options": [
+        {"key": "suv", "text": "SUV"},
+        {"key": "coupe", "text": "Coupe"},
+        {"key": "truck", "text": "Truck"},
+        {"key": "sedan", "text": "Sedan"}
+      ],
+      "formatter": "(props) => (<DropDown {...props} onChange={handleDropDownChange} />)"
+    },
+    "minSalePrice": {
+      "type": "Currency",
+      "editor": "(props) => (<span><input className='rdg-text-editor' value={props.row.currency} type='number' /></span>)",
+      "formatter": "(props) => (<CurrencyFormatter {...props} value={props.row.currency} />)"
+    },
+    "maxSalePrice": {
+      "type": "Currency",
+      "editor": "(props) => (<span><input className='rdg-text-editor' value={props.row.currency} type='number' /></span>)",
+      "formatter": "(props) => (<CurrencyFormatter {...props} value={props.row.currency} />)"
+    },
+    "pricingFunction": {
+      "type": "ContextMenu",
+      "Menu": [
+        {
+          "function" : {
+            "name": "function",
+            "type": "DropDown",
+            "options":[
+              { "key": "percentage", "text": "Percentage" },
+              { "key": "flatFee", "text": "Flat Fee" }
+            ]
+          } 
+        },
+        {
+          "value_1" : {
+            "name": "Value 1",
+            "type": "DropDown",
+            "options":[
+              { "key": "ten", "text": "10%" },
+              { "key": "twenty", "text": "20%" }
+            ]
+          } 
+        },
+        {
+          "value_2" : {
+            "name": "Value 2",
+            "type": "DropDown",
+            "options":[
+              { "key": "lotSalePrice", "text": "Lot Sale Price" }
+            ]
+          } 
+        }
+      ] 
+    },
+    "pricingValue": {
+      "type": ""
+    }
+    
+  }
+}
