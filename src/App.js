@@ -25,7 +25,11 @@ const currencyFormatter = new Intl.NumberFormat(navigator.language, {
 });
 
 function CurrencyFormatter({ value }) {
-  return <>{currencyFormatter.format(value)}</>;
+  return (
+    <div className='cell-padding'>
+      {currencyFormatter.format(value)}
+    </div>
+  );
 }
 
 function autoFocus(input) {
@@ -43,7 +47,7 @@ const TextEditor = (props) => {
 const ContextTextEditor = (props) => {
   return (
     <span className="buttonInside">
-      <input type="text" className="rdg-text-editor" value="Percent" />
+      <input type="text"  value="Percent" className="input-ContextMenu" />
       <button id="open"><i className="fa fa-pencil"></i></button>
     </span>
   );
@@ -98,7 +102,7 @@ const App = () => {
       case "Text":
         add = {
           editor: (props) => (
-            <TextEditor {...props} onTextChange = {handleTextEditor} />
+            <TextEditor {...props}  onTextChange = {handleTextEditor} />
           ),
         }
         break;

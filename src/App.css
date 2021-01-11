@@ -65,3 +65,24 @@ button {
   transform: translateX(2px); 
 }
 
+.rdg-cell {
+  padding: 0px;
+}
+
+.cell-padding {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.title-88 {
+  line-height: 30px ;
+  border-radius: 0px;
+  border-width: 0px;
+  color:black;
+}
+
+.input-ContextMenu {
+  border-width: 0px;
+  padding-left: 8px;
+}
+
