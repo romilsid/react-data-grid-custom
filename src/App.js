@@ -10,7 +10,7 @@ import "react-data-grid/dist/react-data-grid.css";
 import {Row as GridRow} from 'react-data-grid';
 import './App.css';
 
-
+console.log("change");
 
 const col = config.columns;
 const meta = config.columnMetadata;
