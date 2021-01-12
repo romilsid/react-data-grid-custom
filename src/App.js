@@ -35,7 +35,6 @@ function autoFocus(input) {
 }
 
 const TextEditor = (props) => {
-  console.log(props);
   return (
     <span>
       <input ref = {autoFocus} type = "text" className="rdg-text-editor" value={props.row[props.column.key]} onChange={(event) => props.onTextChange(event, props)} />
@@ -67,7 +66,7 @@ const App = () => {
     {
       id : 2,
       comments: "Testing",
-      membershipType: "Basic",
+      membershipType: "Premium",
       vehicleType: "Sedan",
       minSalePrice: 500,
       maxSalePrice: 2000,
@@ -77,13 +76,35 @@ const App = () => {
     {
       id : 3,
       comments: "Testing done",
+      membershipType: "Premium",
+      vehicleType: "Coupe",
+      minSalePrice: 500,
+      maxSalePrice: 2000,
+      pricingFunction: "",
+      pricingValue: ""
+    },
+    {
+      id : 4,
+      comments: "Testing done",
       membershipType: "Medium",
       vehicleType: "Coupe",
       minSalePrice: 500,
       maxSalePrice: 2000,
       pricingFunction: "",
       pricingValue: ""
-    }
+    },
+    {
+      id : 5,
+      comments: "Testing done",
+      membershipType: "Medium",
+      vehicleType: "Coupe",
+      minSalePrice: 500,
+      maxSalePrice: 2000,
+      pricingFunction: "",
+      pricingValue: ""
+    },
+    
+
   ];
 
   const [rows, setRows] = useState(customRows);
@@ -105,8 +126,6 @@ const App = () => {
           ),
           formatter: (props) => {
             let flag = false;
-            console.log(props);
-            console.log(rows[props.rowIdx][props.column.key]);
             if(props.rowIdx >= 1 ){
               if( rows[props.rowIdx][props.column.key] !== rows[props.rowIdx - 1][props.column.key] ) {
               flag = true;
@@ -132,11 +151,57 @@ const App = () => {
       break;
 
       case "DropDown":
+        // add = {
+        //   formatter : (props) => (
+        //   <DropDown {...props} optionsNeeded = {obj.options} onChange={handleDropDownChange}  />
+        //   ) 
+        // };
+
         add = {
-          formatter : (props) => (
-          <DropDown {...props} optionsNeeded = {obj.options} onChange={handleDropDownChange}  />
-          ) 
-        };
+          formatter: (props) => {
+            let flag = true;
+            let col = Object.keys(props.row);
+            if(props.rowIdx >= 1) {
+              let prevCol;
+              let curCol;
+              col.forEach(function (item, index) {
+                if (item === props.column.key) {
+                  prevCol = index - 1;
+                  curCol = index;
+                }
+              });
+              
+              if (
+                rows[props.rowIdx][col[prevCol]] ===
+                rows[props.rowIdx - 1][col[prevCol]]
+              ) {
+                
+                if (
+                  rows[props.rowIdx][col[curCol]] ===
+                  rows[props.rowIdx - 1][col[curCol]]
+                ) {
+                  flag = false;
+                }
+              }  
+            }
+
+            return (
+              <>
+                {flag ? (
+                  <div className="break-cell">
+                    <DropDown {...props} optionsNeeded = {obj.options} onChange={handleDropDownChange}  />
+                  </div>
+                ) : (
+                  <div className="continuous-cell">
+                    <DropDown {...props} optionsNeeded = {obj.options} onChange={handleDropDownChange}  />
+                  </div>
+                )}
+              </>
+            );
+
+
+          }
+        }
         break;
 
       case "Currency":
@@ -187,7 +252,6 @@ const App = () => {
   };
 
   const handleTextEditor = (event, props) => {
-    console.log("props + ", props);
     const oldRows = [...rows];
     oldRows.forEach((row) => {
         if(row.id === props.row.id) {
@@ -282,32 +346,4 @@ export default App;
 
 
 
-  // const columns = [
-  //   { key: "id", name: "ID" },
-  //   { key: "lastName", name: "Last Name", 
-  //     editor: (props) => (
-  //       <TextEditor {...props} onTextChange = {handleTextEditor} />
-  //     )
-  //   },
-  //   {
-  //     key: "currency",
-  //     name: "Currency",
-  //     editor: (props) => (
-  //       <TextEditor {...props} onTextChange = {handleTextEditor} />
-  //     ),
-  //     formatter: (props) => (
-  //       <CurrencyFormatter {...props} value={props.row.currency} />
-  //     )
-  //   },
-  //   { key: "jobTitle", name: "Job Title" },
-  //   {
-  //     key: "jobType",
-  //     name: "Job Type",
-  //     editable: true,
-  //     resizable: true,
-  //     formatter: (props) => (
-  //       <DropDown {...props} op onChange={handleDropDownChange}  />
-  //     )
-  //   },
-  //   { key: "phone", name: "Phone" }
-  // ];
+
