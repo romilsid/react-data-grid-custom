@@ -11,7 +11,7 @@
   ],
   "columnMetadata": {
     "id": {
-      "type": "Text"
+      "type": "id"
     }, 
     "comments" : {
       "type": "Text"
@@ -22,8 +22,7 @@
         {"key": "basic", "text": "basic"},
         {"key": "monthly", "text": "Monthly"},
         {"key": "premium", "text": "Premium"}
-      ],
-      "formatter": "(props) => (<DropDown {...props} onChange={handleDropDownChange} />)"
+      ]
     },
     "vehicleType": {
       "type": "DropDown",
@@ -32,18 +31,13 @@
         {"key": "coupe", "text": "Coupe"},
         {"key": "truck", "text": "Truck"},
         {"key": "sedan", "text": "Sedan"}
-      ],
-      "formatter": "(props) => (<DropDown {...props} onChange={handleDropDownChange} />)"
+      ]
     },
     "minSalePrice": {
-      "type": "Currency",
-      "editor": "(props) => (<span><input className='rdg-text-editor' value={props.row.currency} type='number' /></span>)",
-      "formatter": "(props) => (<CurrencyFormatter {...props} value={props.row.currency} />)"
+      "type": "Currency"
     },
     "maxSalePrice": {
-      "type": "Currency",
-      "editor": "(props) => (<span><input className='rdg-text-editor' value={props.row.currency} type='number' /></span>)",
-      "formatter": "(props) => (<CurrencyFormatter {...props} value={props.row.currency} />)"
+      "type": "Currency"
     },
     "pricingFunction": {
       "type": "ContextMenu",

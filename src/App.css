@@ -86,3 +86,14 @@ button {
   padding-left: 8px;
 }
 
+.break-cell {
+  border-right:0.5px solid black;
+  border-top: 0.5px solid black;
+  border-left: 0.5px solid black;
+}
+
+.continuous-cell {
+  color: lightslategray;
+  border-right: 0.5px solid black;
+  border-left: 0.5px solid black;
+}

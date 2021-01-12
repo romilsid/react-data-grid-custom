@@ -10,8 +10,6 @@ import "react-data-grid/dist/react-data-grid.css";
 import {Row as GridRow} from 'react-data-grid';
 import './App.css';
 
-console.log("change");
-
 const col = config.columns;
 const meta = config.columnMetadata;
 
@@ -37,6 +35,7 @@ function autoFocus(input) {
 }
 
 const TextEditor = (props) => {
+  console.log(props);
   return (
     <span>
       <input ref = {autoFocus} type = "text" className="rdg-text-editor" value={props.row[props.column.key]} onChange={(event) => props.onTextChange(event, props)} />
@@ -67,7 +66,7 @@ const App = () => {
     },
     {
       id : 2,
-      comments: "Test",
+      comments: "Testing",
       membershipType: "Basic",
       vehicleType: "Sedan",
       minSalePrice: 500,
@@ -104,8 +103,33 @@ const App = () => {
           editor: (props) => (
             <TextEditor {...props}  onTextChange = {handleTextEditor} />
           ),
+          formatter: (props) => {
+            let flag = false;
+            console.log(props);
+            console.log(rows[props.rowIdx][props.column.key]);
+            if(props.rowIdx >= 1 ){
+              if( rows[props.rowIdx][props.column.key] !== rows[props.rowIdx - 1][props.column.key] ) {
+              flag = true;
+              }
+            } else {
+              flag = true;
+            }
+            return (
+              <>
+                {flag ? (
+                  <div className="break-cell">
+                    {props.row[props.column.key]}  
+                  </div>
+                ) : (
+                  <div className="continuous-cell">
+                  {props.row[props.column.key]}
+                  </div>
+                )}
+              </>
+            );
+          }
         }
-        break;
+      break;
 
       case "DropDown":
         add = {
@@ -150,8 +174,6 @@ const App = () => {
   });
 
 
-
-
   const handleDropDownChange = (props, value) => {
 
       const oldRows = [...rows];
@@ -165,7 +187,7 @@ const App = () => {
   };
 
   const handleTextEditor = (event, props) => {
-
+    console.log("props + ", props);
     const oldRows = [...rows];
     oldRows.forEach((row) => {
         if(row.id === props.row.id) {
